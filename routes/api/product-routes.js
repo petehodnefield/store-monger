@@ -67,7 +67,7 @@ router.get('/:id', (req, res) => {
 
 // create new product
 router.post('/', (req, res) => {
-  
+  console.log(`tag_id`, req.body)
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -81,7 +81,10 @@ router.post('/', (req, res) => {
       product_name: req.body.product_name,
       price: req.body.price,
       stock: req.body.stock,
-      category_id: req.body.tagIds
+      tagIds: [req.body.tagIds]
+    },
+    {
+      include: [{model: Tag, as: 'product_tags'}]
     }
   )
     .then((product) => {
